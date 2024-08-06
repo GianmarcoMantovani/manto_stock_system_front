@@ -4,8 +4,9 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { ApplicationUser } from "../api/types";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { IoIosLogOut } from "react-icons/io";
-import { BiSolidFoodMenu } from "react-icons/bi";
 import logoImagen from "../assets/images/logo_manto.jpeg";
+import { FaPeopleCarry } from "react-icons/fa";
+import { BiSolidPurchaseTag } from "react-icons/bi";
 
 const Sidebar = () => {
   const currentUser = useAuthUser<ApplicationUser>();
@@ -24,7 +25,7 @@ const Sidebar = () => {
           href: "/proveedores",
           opacity: location.pathname.includes("proveedores") ? 1 : 0.5,
           icon: (
-            <BiSolidFoodMenu
+            <FaPeopleCarry
               size={25}
               opacity={location.pathname.includes("proveedores") ? "1" : "0.5"}
             />
@@ -35,7 +36,7 @@ const Sidebar = () => {
           href: "/compras",
           opacity: location.pathname.includes("compras") ? 1 : 0.5,
           icon: (
-            <BiSolidFoodMenu
+            <BiSolidPurchaseTag
               size={25}
               opacity={location.pathname.includes("compras") ? "1" : "0.5"}
             />
