@@ -93,7 +93,7 @@ const CreatePurchaseForm = ({ onClose }: Props) => {
         <GridItem colSpan={1}>
           <FormikInput
             label="Notas"
-            isRequired={true}
+            isRequired={false}
             name={"description"}
             id={"description"}
             value={formik.values.description}

@@ -105,7 +105,7 @@ const EditProviderForm = ({ onClose, provider }: Props) => {
         <GridItem colSpan={1}>
           <FormikInput
             label="Productos"
-            isRequired={true}
+            isRequired={false}
             name={"products"}
             id={"products"}
             value={formik.values.products}
