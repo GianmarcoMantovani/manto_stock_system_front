@@ -8,6 +8,9 @@ import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/home/Home";
 import Providers from "./pages/providers/Providers";
 import Purchases from "./pages/purchases/Purchases";
+import Products from "./pages/products/Products";
+import Clients from "./pages/clients/Clients";
+import Balance from "./pages/balance/Balance";
 
 const signInPath = "/login";
 
@@ -43,7 +46,7 @@ function App() {
   return (
     <VStack w={"full"} minH={"100vh"} spacing={0}>
       <Box w={"full"} flex={1} bgColor={"whitesmoke"}>
-        {location.pathname.includes('login') && <Sidebar />}
+        {location.pathname.includes("login") && <Sidebar />}
         <Routes>
           <Route
             path={"/"}
@@ -67,9 +70,9 @@ function App() {
             path={"/proveedores"}
             element={
               <AuthenticatedLayout>
-              <RequireAuth fallbackPath={signInPath}>
-                <Providers />
-              </RequireAuth>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Providers />
+                </RequireAuth>
               </AuthenticatedLayout>
             }
           />
@@ -77,9 +80,39 @@ function App() {
             path={"/compras"}
             element={
               <AuthenticatedLayout>
-              <RequireAuth fallbackPath={signInPath}>
-                <Purchases />
-              </RequireAuth>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Purchases />
+                </RequireAuth>
+              </AuthenticatedLayout>
+            }
+          />
+          <Route
+            path={"/productos"}
+            element={
+              <AuthenticatedLayout>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Products />
+                </RequireAuth>
+              </AuthenticatedLayout>
+            }
+          />
+          <Route
+            path={"/clientes"}
+            element={
+              <AuthenticatedLayout>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Clients />
+                </RequireAuth>
+              </AuthenticatedLayout>
+            }
+          />
+          <Route
+            path={"/balance"}
+            element={
+              <AuthenticatedLayout>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Balance />
+                </RequireAuth>
               </AuthenticatedLayout>
             }
           />

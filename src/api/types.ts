@@ -134,4 +134,9 @@ export interface KeyValuePair {
     date: Date;
     totalPrice: number;
   }
+
+  export interface Balance {
+    id: number;
+    totalCapital: number;
+  }
   

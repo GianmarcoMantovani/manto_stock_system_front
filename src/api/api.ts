@@ -79,3 +79,20 @@ export const deleteResource = async (
         headers: { Authorization: authHeader },
     });
 };
+
+export const getClientTypes: () => any[] = () => {
+    return [
+        {
+            id: 0,
+            code: "Distribuidor",
+        },
+        {
+            id: 1,
+            code: "Comercio",
+        },
+        {
+            id: 2,
+            code: "Publico",
+        }
+    ];
+};

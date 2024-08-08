@@ -7,6 +7,9 @@ import { IoIosLogOut } from "react-icons/io";
 import logoImagen from "../assets/images/logo_manto.jpeg";
 import { FaPeopleCarry } from "react-icons/fa";
 import { BiSolidPurchaseTag } from "react-icons/bi";
+import { TbCandy } from "react-icons/tb";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { FaCashRegister } from "react-icons/fa";
 
 const Sidebar = () => {
   const currentUser = useAuthUser<ApplicationUser>();
@@ -41,6 +44,39 @@ const Sidebar = () => {
               opacity={location.pathname.includes("compras") ? "1" : "0.5"}
             />
           ),
+        },
+        {
+          label: "Productos",
+          href: "/productos",
+          opacity: location.pathname.includes("productos") ? 1 : 0.5,
+          icon: (
+            <TbCandy
+              size={25}
+              opacity={location.pathname.includes("productos") ? "1" : "0.5"}
+            />
+          ),
+        },
+        {
+          label: "Clientes",
+          href: "/clientes",
+          opacity: location.pathname.includes("clientes") ? 1 : 0.5,
+          icon: (
+            <FaPeopleGroup
+              size={25}
+              opacity={location.pathname.includes("clientes") ? "1" : "0.5"}
+            />
+          ),
+        },
+        {
+          label: "Balance",
+          href: "/balance",
+          opacity: location.pathname.includes("balance") ? 1 : 0.5,
+          icon: (
+            <FaCashRegister
+              size={25}
+              opacity={location.pathname.includes("balance") ? "1" : "0.5"}
+            />
+          ),
         }
       ]
       : []),
@@ -50,54 +86,61 @@ const Sidebar = () => {
     <HStack
       bg={"gray.800"}
       width={"20%"}
-      height="100%"
+      height="100vh"
       position="fixed"
-      spacing={8}
-      top={0}
       left={0}
       justifyContent="center"
       boxShadow="0 4px 20px rgba(0, 0, 0, 0.3)"
+      spacing={0}
+      overflow="auto"
     >
-      <VStack width={"100%"} color={"whitesmoke"} >
-        <VStack>
-        <Link
-          to={"/"}
-        >
-          <Img src={logoImagen} alt="Logo" style={{ marginBottom: '3s0px', maxHeight: '100px' }} />
-        </Link>
-        <Text fontWeight="bold" color="whitesmoke" fontSize={"xx-large"} mb={20}>
-          MANTO
-        </Text>
+      <VStack
+        width={"100%"}
+        color={"whitesmoke"}
+        spacing={4}
+        alignItems="stretch"
+        p={4}
+      >
+        <VStack spacing={4}>
+          <Link to={"/"}>
+            <Img src={logoImagen} alt="Logo" style={{ maxHeight: '100px' }} />
+          </Link>
+          <Text fontWeight="bold" color="whitesmoke" fontSize={"xx-large"}>
+            MANTO
+          </Text>
         </VStack>
-        
-        {NAV_ITEMS.map((item, idx) => (
-          <Box
-            key={idx}
-            _hover={{ opacity: 0.7 }}
-          >
-            <Link to={item.href}>
-              <Box mb={3} mt={3}>
-                <Center>{item.icon}</Center>
-              </Box>
-              <Box>
-                <Center color={"FFFFFF"} opacity={item.opacity}>
-                  {item.label}
-                </Center>
-              </Box>
-            </Link>
-          </Box>
-        ))}
-        <VStack>
-         <Divider mt={20}/>
-        {currentUser &&
-          <Button _hover={{ opacity: 0.7 }} bg={"gray.800"} onClick={logout}>
-            <HStack spacing={2} alignItems="center">
-              <Text color={"white"}>Salir</Text>
-              <IoIosLogOut color={"white"} size={25} />
-            </HStack>
-          </Button>
-          }
-          </VStack>
+
+        <VStack spacing={3} flex="1" overflow="auto">
+          {NAV_ITEMS.map((item, idx) => (
+            <Box
+              key={idx}
+              _hover={{ opacity: 0.7 }}
+            >
+              <Link to={item.href}>
+                <Box mb={3} mt={3}>
+                  <Center>{item.icon}</Center>
+                </Box>
+                <Box>
+                  <Center color={"FFFFFF"} opacity={item.opacity}>
+                    {item.label}
+                  </Center>
+                </Box>
+              </Link>
+            </Box>
+          ))}
+        </VStack>
+
+        <VStack spacing={4} marginTop={5}>
+          <Divider width={"30%"}/>
+          {currentUser && (
+            <Button _hover={{ opacity: 0.7 }} bg={"gray.800"} onClick={logout}>
+              <HStack spacing={2} alignItems="center">
+                <Text color={"white"}>Salir</Text>
+                <IoIosLogOut color={"white"} size={25} />
+              </HStack>
+            </Button>
+          )}
+        </VStack>
       </VStack>
     </HStack>
   );
