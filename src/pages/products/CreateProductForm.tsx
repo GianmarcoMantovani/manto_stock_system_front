@@ -21,13 +21,13 @@ interface Props {
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("El nombre es requerido"),
   description: Yup.string().nullable(),
-  weight: Yup.string().nullable()
+  weight: Yup.number().nullable()
 });
 
 const initialValues = {
   name: "",
   description: "",
-  weight: ""
+  weight: 0
 };
 
 const CreateProductForm = ({ onClose }: Props) => {
@@ -95,6 +95,7 @@ const CreateProductForm = ({ onClose }: Props) => {
             onChange={formik.handleChange}
             touched={formik.touched.weight}
             error={formik.errors.weight}
+            type={"number"}
           />
         </GridItem>
         <GridItem colSpan={1}>

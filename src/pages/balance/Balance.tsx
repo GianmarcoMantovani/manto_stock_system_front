@@ -4,6 +4,8 @@ import { getResource } from "../../api/api";
 import { Balance as TotalBalance } from "../../api/types";
 import { HStack, VStack, Text, Center } from "@chakra-ui/react";
 import Loading from "../../components/Loading";
+import LastSalesModal from "./LastSalesModal";
+import LastPurchasesModal from "./LastPurchasesModal";
 
 const Balance = () => {
   const getAuthHeader = useAuthHeader();
@@ -22,19 +24,24 @@ const Balance = () => {
     <>
       {isSuccess && (
         <Center>
-          <VStack width="80%" borderRadius={"0.5rem"} bg={"white"} p={1} m={5}>
-            <HStack justifyContent={"flex-start"} width={"90%"} mt={4}>
+          <VStack width="100%">
+            <HStack justifyContent={"center"} width={"100%"} mt={10}>
               <Text
+                fontWeight={"bold"}
                 fontSize={{
                   base: "1rem",
                   sm: "1rem",
                   md: "1.2rem",
                   lg: "1.5rem",
-                  xl: "2rem",
+                  xl: "4rem",
                 }}
               >
-                {balance.totalCapital}
+                CAPITAL ACTUAL: ${balance.totalCapital}
               </Text>
+            </HStack>
+            <HStack w={"50%"} ml={200} mt={10} alignSelf={"flex-start"}>
+              <LastSalesModal />
+              <LastPurchasesModal />
             </HStack>
           </VStack>
         </Center>

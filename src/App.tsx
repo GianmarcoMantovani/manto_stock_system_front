@@ -11,6 +11,8 @@ import Purchases from "./pages/purchases/Purchases";
 import Products from "./pages/products/Products";
 import Clients from "./pages/clients/Clients";
 import Balance from "./pages/balance/Balance";
+import Productions from "./pages/productions/Productions";
+import Sales from "./pages/sales/Sales";
 
 const signInPath = "/login";
 
@@ -112,6 +114,26 @@ function App() {
               <AuthenticatedLayout>
                 <RequireAuth fallbackPath={signInPath}>
                   <Balance />
+                </RequireAuth>
+              </AuthenticatedLayout>
+            }
+          />
+          <Route
+            path={"/producciones"}
+            element={
+              <AuthenticatedLayout>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Productions />
+                </RequireAuth>
+              </AuthenticatedLayout>
+            }
+          />
+          <Route
+            path={"/ventas"}
+            element={
+              <AuthenticatedLayout>
+                <RequireAuth fallbackPath={signInPath}>
+                  <Sales />
                 </RequireAuth>
               </AuthenticatedLayout>
             }

@@ -92,10 +92,16 @@ export interface KeyValuePair {
     production: Production;
   }
 
+  export interface ProductionItemCreation {
+    productId: number | null;
+    amount: number | null;
+  }
+
   export interface Production {
     id: number;
-    items: ProductionItem;
-    date: Date
+    items: ProductionItem[];
+    date: Date;
+    totalProduction: number;
   }
 
   export interface Provider {
@@ -125,11 +131,16 @@ export interface KeyValuePair {
     sale: Sale;
   }
 
+  export interface SaleItemCreation {
+    productId: number | null;
+    amount: number | null;
+  }
+
   export interface Sale {
     id: number;
     name: string;
     description: string;
-    items: SaleItem;
+    items: SaleItem[];
     client: Client;
     date: Date;
     totalPrice: number;
