@@ -36,7 +36,7 @@ const Balance = () => {
                   xl: "4rem",
                 }}
               >
-                CAPITAL ACTUAL: ${balance.totalCapital}
+                CAPITAL ACTUAL: ${balance.totalCapital.toLocaleString('es-ES')}
               </Text>
             </HStack>
             <HStack w={"50%"} ml={200} mt={10} alignSelf={"flex-start"}>
