@@ -22,6 +22,7 @@ interface Props {
 const AddItemPopover = ({ addSaleItem }: Props) => {
   const [productId, setProductId] = useState<number | null>(null);
   const [amount, setAmount] = useState<number | null>(null);
+  const [unitPrice, setUnitPrice] = useState<number | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -55,6 +56,12 @@ const AddItemPopover = ({ addSaleItem }: Props) => {
               value={amount ? amount : ""}
               onChange={(e) => setAmount(Number(e.target.value))}
             />
+            <Input
+              type="number"
+              placeholder="Precio unitario"
+              value={unitPrice ? unitPrice : ""}
+              onChange={(e) => setUnitPrice(Number(e.target.value))}
+            />
             <Button
               size={"sm"}
               colorScheme="green"
@@ -64,9 +71,11 @@ const AddItemPopover = ({ addSaleItem }: Props) => {
                 addSaleItem({
                   productId,
                   amount,
+                  unitPrice
                 });
                 setProductId(null);
                 setAmount(null);
+                setUnitPrice(null);
                 onClose();
               }}
             >

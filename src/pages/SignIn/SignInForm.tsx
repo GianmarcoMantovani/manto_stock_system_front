@@ -66,7 +66,7 @@ const SignInForm = () => {
           type="submit"
           color={"white"}
         >
-          Log In
+          Ingresar
         </Button>
       </VStack>
     </chakra.form>

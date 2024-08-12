@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
   products: Yup.string().required(
     "Es obligatorio ingresar que productos se compraron"
   ),
-  amount: Yup.number().required("El monto de la compra es obligatorio"),
+  amount: Yup.number().min(0, "El monto no puede ser menor a 0").required("El monto de la compra es obligatorio"),
   description: Yup.string().nullable(),
   providerId: Yup.number().required("El proveedor es obligatorio")
 });

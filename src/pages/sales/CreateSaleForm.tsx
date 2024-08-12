@@ -7,7 +7,7 @@ import {
   Button,
   VStack,
   FormLabel,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -20,6 +20,7 @@ import AddItemPopover from "./AddItemPopover";
 import SaleItem from "./SaleItem";
 import FormikInput from "../../components/FormikInput";
 import SyncField from "../../components/Dropdowns/SyncField";
+import SoldField from "./SoldFields";
 
 interface Props {
   onClose: () => void;
@@ -31,10 +32,12 @@ const validationSchema = Yup.object().shape({
   items: Yup.array().of(
     Yup.object().shape({
       productId: Yup.number().required("Debe seleccionar un producto"),
-      amount: Yup.number().required("Debe indicar un monto"),
+      amount: Yup.number().min(0).required("Debe indicar un monto"),
+      unitPrice: Yup.number().required("El precio unitario es obligatorio"),
     })
   ),
   totalPrice: Yup.number().required("Debe indicar el monto total de compra"),
+  sold: Yup.boolean()
 });
 
 const initialValues = {
@@ -42,6 +45,7 @@ const initialValues = {
   clientId: 0,
   items: [],
   totalPrice: 0,
+  sold: false
 };
 
 const CreateSaleForm = ({ onClose }: Props) => {
@@ -141,16 +145,11 @@ const CreateSaleForm = ({ onClose }: Props) => {
           </VStack>
         </GridItem>
         <GridItem colSpan={1}>
-          <FormikInput
-            label="Precio Total"
-            isRequired={false}
-            name={"totalPrice"}
-            id={"totalPrice"}
-            value={formik.values.totalPrice}
-            onChange={formik.handleChange}
-            touched={formik.touched.totalPrice}
-            error={formik.errors.totalPrice}
-            type={"number"}
+          <SoldField
+            value={formik.values.sold}
+            setter={(value: boolean) =>
+              formik.setFieldValue("sold", value, true)
+            }
           />
         </GridItem>
         <GridItem colSpan={{ base: 1, md: 2 }}>

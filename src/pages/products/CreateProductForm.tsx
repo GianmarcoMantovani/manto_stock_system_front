@@ -21,7 +21,7 @@ interface Props {
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("El nombre es requerido"),
   description: Yup.string().nullable(),
-  weight: Yup.number().nullable()
+  weight: Yup.number().min(0, "el peso no puede ser menor a 0").nullable()
 });
 
 const initialValues = {

@@ -13,7 +13,7 @@ const DetailedViewBody = ({ resource, label }: Props) => {
         background={"#F5F5F5"}
         borderRadius={"5px"}
         width={"100%"}
-        height={"2rem"}
+        height={"3rem"}
         cursor={"default"}
         paddingLeft={"1rem"}
         color={"#EF810E"}

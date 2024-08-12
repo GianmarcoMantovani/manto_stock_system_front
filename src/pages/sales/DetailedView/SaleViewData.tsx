@@ -32,12 +32,21 @@ const SaleViewData = ({ sale }: Props) => {
             />
           </SimpleGrid>
           <VStack>
-            <Text justifyContent={"center"} align={"center"} fontWeight={"bold"} fontSize={"1.5rem"} mt={5} mb={2}>PRODUCTOS</Text>
+            <Text
+              justifyContent={"center"}
+              align={"center"}
+              fontWeight={"bold"}
+              fontSize={"1.5rem"}
+              mt={5}
+              mb={2}
+            >
+              PRODUCTOS
+            </Text>
           </VStack>
           {sale.items.map((item) => (
             <>
               <SimpleGrid
-                columns={{ base: 1, md: 2 }}
+                columns={{ base: 1, md: 3 }}
                 spacing={5}
                 width={"80%"}
                 mb={5}
@@ -49,6 +58,10 @@ const SaleViewData = ({ sale }: Props) => {
                 <DetailedViewBody
                   resource={item.amount.toString()}
                   label={"Cantidad"}
+                />
+                <DetailedViewBody
+                  resource={"$" + item.unitPrice.toString()}
+                  label={"Precio Unitario"}
                 />
               </SimpleGrid>
             </>

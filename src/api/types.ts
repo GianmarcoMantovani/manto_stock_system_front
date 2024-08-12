@@ -129,11 +129,13 @@ export interface KeyValuePair {
     product: Product;
     amount: number;
     sale: Sale;
+    unitPrice: number;
   }
 
   export interface SaleItemCreation {
     productId: number | null;
     amount: number | null;
+    unitPrice: number | null;
   }
 
   export interface Sale {
@@ -144,6 +146,7 @@ export interface KeyValuePair {
     client: Client;
     date: Date;
     totalPrice: number;
+    sold: boolean;
   }
 
   export interface Balance {

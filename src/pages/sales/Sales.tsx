@@ -1,4 +1,4 @@
-import { Text, useDisclosure } from "@chakra-ui/react";
+import { HStack, Text, useDisclosure } from "@chakra-ui/react";
 import { Sale } from "../../api/types";
 import { DynamicTableCellFormat } from "../../components/DynamicTable/DynamicTable";
 import MainLayout from "../../components/DynamicTable/MainLayout";
@@ -6,6 +6,7 @@ import AddNewButton from "../../components/AddNewButton";
 import moment from "moment";
 import CreateSaleModal from "./CreateSaleModal";
 import SaleViewButton from "./DetailedView/SaleViewButton";
+import EditButton from "./EditButton";
 
 const format: DynamicTableCellFormat<Sale>[] = [
   {
@@ -35,6 +36,25 @@ const format: DynamicTableCellFormat<Sale>[] = [
       </Text>
   ),
     isSortable: true,
+  },
+  {
+    header: "Cobrada",
+    accessor: "sold",
+    accessorFn: (r) => (
+      <Text>
+          {r.row.sold ? "Si" : "No"}
+      </Text>
+  ),
+    isSortable: true,
+  },
+  {
+    header: "Editar",
+    accessor: "",
+    accessorFn: (cell) => (
+      <HStack justifyContent={"center"} spacing={2}>
+        {cell.row.sold === false && <EditButton sale={cell.row} />}
+      </HStack>
+    ),
   },
   {
     header: "VER VENTA",

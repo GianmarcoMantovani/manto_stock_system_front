@@ -29,7 +29,8 @@ const SaleItem = ({ saleItem, removeItem }: Props) => {
       <Icon fontSize={"3xl"} as={IoPricetag} />
       <VStack alignItems="flex-start" spacing={1}>
         <Text fontSize={"sm"}>{isSuccess && product.name}</Text>
-        <Text fontSize={"xs"}>{saleItem.amount}</Text>
+        <Text fontSize={"sm"}>{saleItem.amount}</Text>
+        <Text fontSize={"sm"}>${saleItem.unitPrice}</Text>
       </VStack>
       <IconButton
         icon={<AiFillDelete />}
