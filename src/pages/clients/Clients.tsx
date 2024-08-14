@@ -6,6 +6,8 @@ import DeleteButton from "../../components/DeleteButton";
 import MainLayout from "../../components/DynamicTable/MainLayout";
 import AddNewButton from "../../components/AddNewButton";
 import CreateClientModal from "./CreateClientModal";
+import ClientsFilters from "./ClientsFilters";
+import { useState } from "react";
 
 const format: DynamicTableCellFormat<Client>[] = [
   {
@@ -16,9 +18,7 @@ const format: DynamicTableCellFormat<Client>[] = [
   {
     header: "Tipo de Cliente",
     accessor: "clientTypeEnum",
-    accessorFn: (r) => (
-      <Text>{ClientTypeEnum[r.row.clientTypeEnum]}</Text>
-    ),
+    accessorFn: (r) => <Text>{ClientTypeEnum[r.row.clientTypeEnum]}</Text>,
     isSortable: false,
   },
   {
@@ -61,12 +61,45 @@ const format: DynamicTableCellFormat<Client>[] = [
 
 const Clients = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [cityId, setCityId] = useState<number | null>(null);
+  const [clientTypeEnum, setClientTypeEnum] = useState<number | null>(null);
 
   return (
     <MainLayout
       resource={"client"}
       format={format}
-      queryFilters={[]}
+      filters={
+        <ClientsFilters
+          name={name}
+          setName={setName}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          cityId={cityId}
+          setCityId={setCityId}
+          clientTypeEnum={clientTypeEnum}
+          setClientTypeEnum={setClientTypeEnum}
+        />
+      }
+      queryFilters={[
+        {
+          field: "name",
+          value: name,
+        },
+        {
+          field: "phoneNumber",
+          value: phoneNumber,
+        },
+        {
+          field: "clientTypeEnum",
+          value: clientTypeEnum,
+        },
+        {
+          field: "city.id",
+          value: cityId,
+        },
+      ]}
       perPage={10}
       tableTitle="Clientes"
       buttons={

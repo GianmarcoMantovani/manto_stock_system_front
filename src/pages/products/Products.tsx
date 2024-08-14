@@ -6,6 +6,8 @@ import DeleteButton from "../../components/DeleteButton";
 import MainLayout from "../../components/DynamicTable/MainLayout";
 import AddNewButton from "../../components/AddNewButton";
 import CreateProductModal from "./CreateProductModal";
+import ProductsFilters from "./ProductsFilters";
+import { useState } from "react";
 
 const format: DynamicTableCellFormat<Product>[] = [
   {
@@ -21,9 +23,7 @@ const format: DynamicTableCellFormat<Product>[] = [
   {
     header: "Peso",
     accessor: "weight",
-    accessorFn: (r) => (
-      <Text>{r.row.weight}g</Text>
-    ),
+    accessorFn: (r) => <Text>{r.row.weight}g</Text>,
     isSortable: true,
   },
   {
@@ -50,13 +50,20 @@ const format: DynamicTableCellFormat<Product>[] = [
 ];
 
 const Products = () => {
+  const [name, setName] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <MainLayout
       resource={"product"}
       format={format}
-      queryFilters={[]}
+      filters={<ProductsFilters name={name} setName={setName} />}
+      queryFilters={[
+        {
+          field: "name",
+          value: name,
+        },
+      ]}
       perPage={10}
       tableTitle="Productos"
       buttons={

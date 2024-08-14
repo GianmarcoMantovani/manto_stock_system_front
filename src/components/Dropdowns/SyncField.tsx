@@ -10,6 +10,7 @@ interface Props {
     resource: string;
     title: string;
     labelProp?: string;
+    isClearable?: boolean;
 }
 
 const SyncField = ({
@@ -20,7 +21,8 @@ const SyncField = ({
     isRequired,
     resource,
     title,
-    labelProp
+    labelProp,
+    isClearable
 }: Props) => {
     return (
         <FormControl
@@ -35,6 +37,7 @@ const SyncField = ({
                 setter={setter}
                 defaultValue={defaultValue}
                 placeholder=""
+                isClearable={isClearable}
             />
             <FormErrorMessage>{error}</FormErrorMessage>
         </FormControl>

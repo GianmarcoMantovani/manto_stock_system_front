@@ -11,10 +11,11 @@ interface Props extends StateManagerProps {
     labelProp: string;
     valueProp: string;
     title?: string;
+    isClearable?: boolean;
 }
 
 const SyncSingleValueDropdownFilter = (props: Props) => {
-    const { setter, resource, labelProp, valueProp, title, styles, ...rest } =
+    const { setter, resource, labelProp, valueProp, title, styles, isClearable, ...rest } =
         props;
 
     const getAuthHeader = useAuthHeader();
@@ -56,6 +57,7 @@ const SyncSingleValueDropdownFilter = (props: Props) => {
                           }
                 }
                 {...rest}
+                isClearable={isClearable ? isClearable : true}
             />
         </VStack>
     );
