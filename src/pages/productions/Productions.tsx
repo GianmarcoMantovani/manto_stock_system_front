@@ -6,6 +6,8 @@ import AddNewButton from "../../components/AddNewButton";
 import CreateProductionModal from "./CreateProductionModal";
 import moment from "moment";
 import ProductionViewButton from "./DetailedView/ProductionViewButton";
+import ProductionsFilters from "./ProductionsFilters";
+import { useState } from "react";
 
 const format: DynamicTableCellFormat<Production>[] = [
   {
@@ -31,12 +33,31 @@ const format: DynamicTableCellFormat<Production>[] = [
 
 const Productions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   return (
     <MainLayout
       resource={"production"}
       format={format}
-      queryFilters={[]}
+      filters={
+        <ProductionsFilters
+          to={to}
+          setTo={setTo}
+          from={from}
+          setFrom={setFrom}
+        />
+      }
+      queryFilters={[
+        {
+          field: "date_bgr",
+          value: from !== "" ? from : undefined,
+        },
+        {
+          field: "date_sml",
+          value: to !== "" ? to : undefined,
+        },
+      ]}
       perPage={10}
       tableTitle="Producciones"
       buttons={
