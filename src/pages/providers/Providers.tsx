@@ -6,6 +6,8 @@ import DeleteButton from "../../components/DeleteButton";
 import MainLayout from "../../components/DynamicTable/MainLayout";
 import AddNewButton from "../../components/AddNewButton";
 import CreateProviderModal from "./CreateProviderModal";
+import { useState } from "react";
+import ProvidersFilters from "./ProvidersFilters";
 
 const format: DynamicTableCellFormat<Provider>[] = [
   {
@@ -58,12 +60,52 @@ const format: DynamicTableCellFormat<Provider>[] = [
 
 const Providers = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [cityId, setCityId] = useState<number | null>(null);
+  const [products, setProducts] = useState("");
+  const [company, setCompany] = useState("");
 
   return (
     <MainLayout
       resource={"provider"}
       format={format}
-      queryFilters={[]}
+      filters={
+        <ProvidersFilters
+          name={name}
+          setName={setName}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          cityId={cityId}
+          setCityId={setCityId}
+          products={products}
+          setProducts={setProducts}
+          company={company}
+          setCompany={setCompany}
+        />
+      }
+      queryFilters={[
+        {
+          field: "name",
+          value: name,
+        },
+        {
+          field: "phoneNumber",
+          value: phoneNumber,
+        },
+        {
+          field: "products",
+          value: products,
+        },
+        {
+          field: "company",
+          value: company,
+        },
+        {
+          field: "city.id",
+          value: cityId,
+        },
+      ]}
       perPage={10}
       tableTitle="Proveedores"
       buttons={

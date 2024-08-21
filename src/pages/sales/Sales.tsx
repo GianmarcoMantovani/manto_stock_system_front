@@ -7,6 +7,8 @@ import moment from "moment";
 import CreateSaleModal from "./CreateSaleModal";
 import SaleViewButton from "./DetailedView/SaleViewButton";
 import EditButton from "./EditButton";
+import { useState } from "react";
+import SalesFilters from "./SalesFilters";
 
 const format: DynamicTableCellFormat<Sale>[] = [
   {
@@ -30,21 +32,13 @@ const format: DynamicTableCellFormat<Sale>[] = [
   {
     header: "Precio Total",
     accessor: "totalPrice",
-    accessorFn: (r) => (
-      <Text>
-          ${r.row.totalPrice}
-      </Text>
-  ),
+    accessorFn: (r) => <Text>${r.row.totalPrice}</Text>,
     isSortable: true,
   },
   {
     header: "Cobrada",
     accessor: "sold",
-    accessorFn: (r) => (
-      <Text>
-          {r.row.sold ? "Si" : "No"}
-      </Text>
-  ),
+    accessorFn: (r) => <Text>{r.row.sold ? "Si" : "No"}</Text>,
     isSortable: true,
   },
   {
@@ -66,12 +60,45 @@ const format: DynamicTableCellFormat<Sale>[] = [
 
 const Sales = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [clientId, setClientId] = useState<number | null>(null);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [sold, setSold] = useState(true);
 
   return (
     <MainLayout
       resource={"sale"}
       format={format}
-      queryFilters={[]}
+      filters={
+        <SalesFilters
+          clientId={clientId}
+          setClientId={setClientId}
+          to={to}
+          setTo={setTo}
+          from={from}
+          setFrom={setFrom}
+          sold={sold}
+          setSold={setSold}
+        />
+      }
+      queryFilters={[
+        {
+          field: "sold",
+          value: sold,
+        },
+        {
+          field: "client.id",
+          value: clientId,
+        },
+        {
+          field: "date_bgr",
+          value: from !== "" ? from : undefined,
+        },
+        {
+          field: "date_sml",
+          value: to !== "" ? to : undefined,
+        },
+      ]}
       perPage={10}
       tableTitle="Ventas"
       buttons={
