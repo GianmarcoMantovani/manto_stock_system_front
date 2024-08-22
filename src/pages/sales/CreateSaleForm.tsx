@@ -7,7 +7,7 @@ import {
   Button,
   VStack,
   FormLabel,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -37,7 +37,7 @@ const validationSchema = Yup.object().shape({
     })
   ),
   totalPrice: Yup.number().required("Debe indicar el monto total de compra"),
-  sold: Yup.boolean()
+  sold: Yup.boolean(),
 });
 
 const initialValues = {
@@ -45,7 +45,7 @@ const initialValues = {
   clientId: 0,
   items: [],
   totalPrice: 0,
-  sold: false
+  sold: false,
 };
 
 const CreateSaleForm = ({ onClose }: Props) => {
@@ -136,7 +136,7 @@ const CreateSaleForm = ({ onClose }: Props) => {
                   removeItem={() =>
                     formik.setFieldValue(
                       "items",
-                      formik.values.items.filter((p, i) => i !== _i)
+                      formik.values.items.filter((_p, i) => i !== _i)
                     )
                   }
                 />

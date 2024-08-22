@@ -107,7 +107,7 @@ const CreateProductionForm = ({ onClose }: Props) => {
                   formik.setFieldValue(
                     "items",
                     formik.values.items.filter(
-                      (p, i) => i !== _i
+                      (_p, i) => i !== _i
                     )
                   )
                 }
